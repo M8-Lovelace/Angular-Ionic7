@@ -1,0 +1,32 @@
+<ion-header [translucent]="true"></ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-grid>
+    <!-- Cada fila es un pokemon -->
+    <ion-row class="ion-align-items-center border-bottom" *ngFor="let pokemon of pokemons" (click)="goToDetail(pokemon)">
+      <!-- Imagen -->
+      <ion-col size="3">
+        <ion-img [src]="pokemon.sprite"></ion-img>
+      </ion-col>
+      <!-- Nombre -->
+      <ion-col size="4">
+        <ion-text class="ion-text-capitalize">{{pokemon.name}}</ion-text>
+      </ion-col>
+      <!-- Tipo 1 -->
+      <ion-col size="2">
+        <ion-img [src]="'assets/img/' + pokemon.type1 + '.gif'"></ion-img>
+      </ion-col>
+      <!-- Tipo 2 -->
+      <ion-col size="2">
+        <ion-img *ngIf="pokemon.type2" [src]="'assets/img/' + pokemon.type2 + '.gif'"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Scroll infinito -->
+  <ion-infinite-scroll threshold="50px" (ionInfinite)="morePokemon($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
