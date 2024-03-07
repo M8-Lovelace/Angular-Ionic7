@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Linterna
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-grid>
+    <ion-row>
+      <!-- Texto -->
+      <ion-col class="ion-text-center">
+        <ion-text *ngIf="active">La linterna esta encendida</ion-text>
+        <ion-text *ngIf="!active">La linterna esta apagada</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <!-- Toggle -->
+      <ion-col class="ion-text-center ion-margin-top">
+        <ion-toggle [(ngModel)]="active" [enableOnOffLabels]="true" (ionChange)="flash()"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "03_flashlight",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
