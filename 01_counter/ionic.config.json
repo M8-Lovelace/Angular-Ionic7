@@ -1,0 +1,7 @@
+{
+  "name": "01_counter_standalone_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
