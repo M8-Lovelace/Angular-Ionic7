@@ -1,0 +1,47 @@
+<form (ngSubmit)="createAccount()">
+
+  <ion-grid>
+
+    <!-- Email -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input [label]="'label.email' | translate" type="text" [(ngModel)]="user.email" name="email">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Password -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input [label]="'label.password' | translate" type="password" [(ngModel)]="user.password" name="password">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Address -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input [label]="'label.address' | translate" type="text" [(ngModel)]="user.address" name="address">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Botones -->
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" type="button" (click)="exit()">{{'label.back' | translate}}</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" type="submit" >{{'label.create.account' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</form>

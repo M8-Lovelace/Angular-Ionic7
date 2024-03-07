@@ -1,0 +1,87 @@
+<ion-content [fullscreen]="true" *ngIf="product">
+  
+  <!-- Refresco -->
+  <ion-refresher slot="fixed" (ionRefresh)="getProduct($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Producto sin extras -->
+  <ion-grid *ngIf="!product.extras">
+    <ion-row>
+      <ion-col>
+        <ion-card class="list ion-text-center">
+          <!-- Imagen del producto -->
+          <ion-img [src]="'assets/img/products/' + product.img"></ion-img>
+          <ion-card-header>
+            <!-- Titulo -->
+            <ion-card-title>
+              {{('label.price' | translate) + ': ' + product.price + ' €'}}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Producto con extras -->
+  <ion-grid *ngIf="product.extras">
+
+    <!-- Precio acumulado -->
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>{{'label.price' | translate}}:</ion-label>
+          <ion-text>{{total}} €</ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Recorremos los extras -->
+    <ion-row *ngFor="let extra of product.extras">
+
+      <!-- Label del extra -->
+      <ion-col size="12" class="ion-text-center block-title">
+        <ion-text>{{extra.label | translate}}</ion-text>
+      </ion-col>
+
+      <ion-col [size]="extra.blocks.length == 1 ? 12 : 6" *ngFor="let block of extra.blocks">
+
+        <ion-card class="list product ion-text-center">
+          <!-- Imagen del bloque de extra -->
+          <ion-img [src]="'assets/img/products/' + block.img"></ion-img>
+          <ion-card-header>
+            <!-- Nombre del bloque del extra -->
+            <ion-card-title>
+              {{block.name | translate}}
+              <ion-text *ngIf="block.options.length == 1">({{block.options[0].price + ' €'}})</ion-text>
+            </ion-card-title>
+          </ion-card-header>
+          <!-- Una sola opcion (checkbox) -->
+          <ion-card-content *ngIf="block.options.length == 1">
+            <ion-checkbox (ionChange)="calculateTotal()" [(ngModel)]="block.options[0].activate" name="check" labelPlacement="end">{{(block.options[0].activate ? block.options[0].price : '0') + ' €'}}</ion-checkbox>
+          </ion-card-content>
+          <!-- Varias opciones (radio) -->
+          <ion-card-content *ngIf="block.options.length > 1">
+            <ion-radio-group [value]="block.options[0].name" (ionChange)="changeMultipleOption($event, block.options)">
+              <ion-item lines="none" *ngFor="let option of block.options" class="ion-no-padding">
+                <ion-radio labelPlacement="start" [value]="option.name" >{{(option.name | translate) + ' (+' + option.price + ' €)'}}</ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+  <!-- Boton para añadir el producto -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addProductOrder()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>

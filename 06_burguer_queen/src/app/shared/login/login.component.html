@@ -1,0 +1,53 @@
+<form (ngSubmit)="login()">
+
+  <ion-grid>
+
+    <!-- Email -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input 
+            [label]="'label.email' | translate" 
+            type="text"
+            [(ngModel)]="user.email"
+            name="email">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Password -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input
+            [label]="'label.password' | translate"
+            type="password"
+            [(ngModel)]="user.password"
+            name="password">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Botones -->
+    <ion-row>
+      <ion-col *ngIf="showBack">
+        <ion-button expand="block" type="button" (click)="exit()">{{'label.back' | translate}}</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" type="submit" >{{'label.login' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Enlace a nueva cuenta -->
+    <ion-row>
+      <ion-col>
+        <a (click)="createNewAccount()">{{'label.new.account' | translate}}</a>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+</form>

@@ -1,0 +1,56 @@
+<ion-grid>
+  <ion-row class="ion-text-center">
+    <!-- Sin productos -->
+    <ion-col *ngIf="userOrderService.numProducts() == 0">
+      <ion-text>{{'label.no.products' | translate}}</ion-text>
+    </ion-col>
+    <!-- Con productos -->
+    <ion-col *ngIf="userOrderService.numProducts() > 0">
+
+      <ion-list>
+        <!-- Recorremos los productos -->
+        <ng-container *ngFor="let quantityProduct of userOrderService.getProducts()">
+          <!-- Nombre del producto -->
+          <ion-item>
+            <ion-label class="ion-text-wrap">{{quantityProduct.product.name | translate}}</ion-label>
+          </ion-item>
+          <!-- Extras del producto -->
+          <ion-item *ngIf="quantityProduct.product.extras">
+            <ul>
+              <li *ngFor="let optionSelected of quantityProduct.product.extras | extrasSelected">{{optionSelected}}</li>
+            </ul>
+          </ion-item>
+          <ion-card>
+            <ion-card-content>
+              <!-- Opciones de aumentar y decrementar -->
+              <ion-item lines="none">
+                <ion-label>{{'label.quantity' | translate}}</ion-label>
+                <ion-icon (click)="userOrderService.oneLessProduct(quantityProduct.product)" name="remove-circle-outline"></ion-icon>
+                <ion-text class="ion-padding">{{quantityProduct.quantity}}</ion-text>
+                <ion-icon (click)="userOrderService.oneMoreProduct(quantityProduct.product)" name="add-circle-outline"></ion-icon>
+              </ion-item>
+
+              <!-- Total del producto -->
+              <ion-item lines="none">
+                <ion-label slot="end">{{('label.total' | translate) + userOrderService.totalPrice(quantityProduct) + ' €'}}</ion-label>
+              </ion-item>
+
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+       
+      </ion-list>
+
+    </ion-col>
+  </ion-row>
+
+  <!-- Total de la orden -->
+  <ion-row *ngIf="userOrderService.numProducts() > 0">
+    <ion-col>
+      <ion-item lines="none">
+        <ion-label>{{('label.total.order' | translate) + userOrderService.totalOrder() + ' €'}}</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>

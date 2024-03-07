@@ -1,0 +1,65 @@
+<!-- Menu -->
+<ion-menu side="end" content-id="content" menu-id="content">
+  <!-- Cabecera del menu -->
+  <ion-header>
+    <ion-item lines="none">
+      <ion-icon name="arrow-back-outline" *ngIf="showInfoUser || showOrder" (click)="back()"></ion-icon>
+      <ion-title>{{'label.menu' | translate}}</ion-title>
+    </ion-item>
+  </ion-header>
+  <ion-content>
+
+    <ion-list *ngIf="!showInfoUser && !showOrder">
+      <!-- Panel de usuario -->
+      <ion-item (click)="userOrderService.hasUser() ? logout() : showPanelInfoUser()">
+        <ion-icon slot="start" name="people-outline"></ion-icon>
+        <ion-label>{{(userOrderService.hasUser() ? 'label.logout' : 'label.start.session') | translate}}</ion-label>
+      </ion-item>
+      <!-- Pedido -->
+      <ion-item (click)="seeOrder()">
+        <ion-icon slot="start" name="cart-outline"></ion-icon>
+        <ion-label>{{'label.see.order' | translate}}</ion-label>
+        <ion-badge slot="end">{{userOrderService.numProducts()}}</ion-badge>
+      </ion-item>
+    </ion-list>
+
+    <!-- Login -->
+    <app-login *ngIf="showInfoUser && !showCreateAccount"
+      (back)="back()"
+      (doLogin)="back()"
+      (newAccount)="newAccount()">      
+    </app-login>
+
+    <!-- Nueva cuenta -->
+    <app-create-account 
+      *ngIf="showInfoUser && showCreateAccount"
+      (back)="showLogin()"
+      (doCreateAccount)="back()">
+    </app-create-account>
+
+    <!-- Ver pedido -->
+    <ng-container *ngIf="showOrder">
+      <app-list-products-order></app-list-products-order>
+      <ion-button expand="block" [disabled]="userOrderService.numProducts() == 0" (click)="goToPay()">{{'label.pay.order' | translate}}</ion-button>
+    </ng-container>
+
+  </ion-content>
+</ion-menu>
+
+<ion-header transluent>
+  <ion-toolbar>
+
+    <ion-buttons slot="start" class="back-button">
+      <ion-icon *ngIf="showBack" name="arrow-back-outline" color="light" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      <ion-img src="assets/img/logo_app.jpg" class="logo"></ion-img>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>

@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row *ngIf="!userOrderService.hasUser()">
+      <ion-col>
+        <app-login *ngIf="!showNewAccount" [showBack]="false" (newAccount)="newAccount()"></app-login>
+        <app-create-account *ngIf="showNewAccount" (back)="showLogin()"></app-create-account>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="userOrderService.hasUser()">
+      <ion-col>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              {{'label.order' | translate}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngIf="step == 1">
+            <app-list-products-order></app-list-products-order>
+            <ion-button [disabled]="userOrderService.numProducts() == 0" (click)="nextStep()">{{'label.next' | translate}}</ion-button>
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              {{'label.address' | translate}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngIf="step == 2">
+
+            <ion-radio-group [(ngModel)]="optionAddress" (ionChange)="changeOptionAddress()">
+              <ion-item lines="none">
+                <ion-radio value="address-default">{{'label.use.my.address' | translate}}</ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-radio value="choose-address">{{'label.choose.address' | translate}}</ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-item *ngIf="showNewAddress">
+              <ion-input [label]="'label.address' | translate" [(ngModel)]="address"></ion-input>
+            </ion-item>
+
+            <ion-button (click)="previousStep()">{{'label.previous' | translate}}</ion-button>
+            <ion-button (click)="nextStep()">{{'label.next' | translate}}</ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              {{'label.payment.gateway' | translate}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngIf="step == 3">
+
+            <ion-button color="tertiary" expand="block" (click)="payWithStripe()">{{'label.pay.stripe' | translate}}</ion-button>
+
+            <ion-button (click)="previousStep()">{{'label.previous' | translate}}</ion-button>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="backHome()">{{'label.back.home' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

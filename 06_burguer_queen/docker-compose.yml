@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+  burguer-queen: 
+    image: discoduroderoer/burguer-queen:v1
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    command: npm run start:dev
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data_container:

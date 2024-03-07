@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true">
+
+  <!-- Refrescamos los productos -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshProducts($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+    <ion-row>
+      <!-- Recorremos los productos -->
+      <ion-col size="6" *ngFor="let product of products">
+
+        <ion-card class="list ion-text-center" (click)="goToProduct(product)">
+          <!-- Imagen del producto -->
+          <ion-img [src]="'assets/img/products/' + product.img"></ion-img>
+          <ion-card-header>
+            <!-- Nombre del producto -->
+            <ion-card-title>{{product.name | translate}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

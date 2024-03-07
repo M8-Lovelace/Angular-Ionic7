@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+  
+  <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshCategories($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+    <ion-row>
+      <!-- Recorremos las categorias -->
+      <ion-col size="6" *ngFor="let category of categories">
+        <ion-card class="list ion-text-center" (click)="goToProducts(category)">
+          <!-- Imagen -->
+          <ion-img [src]="'assets/img/products/' + category.img"></ion-img>
+          <ion-card-header>
+            <!-- Nombre -->
+            <ion-card-title>{{category.name | translate}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

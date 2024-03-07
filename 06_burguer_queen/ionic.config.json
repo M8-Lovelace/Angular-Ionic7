@@ -1,0 +1,7 @@
+{
+  "name": "06_burguer_queen",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

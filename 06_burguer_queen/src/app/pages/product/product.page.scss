@@ -1,0 +1,12 @@
+.block-title {
+    font-size: 22px;
+}
+
+ion-card.product {
+    height: 95%;
+}
+
+ion-card.product ion-item {
+    --padding-end: 0px;
+    --inner-padding-end: 0px;
+}
