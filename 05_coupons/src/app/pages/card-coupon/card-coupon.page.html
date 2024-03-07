@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- Boton para volver atras -->
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Tarjeta cupón</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content class="ion-text-center">
+      <!-- Componente para mostrar QR -->
+      <qrcode 
+        [qrdata]="QRCode" 
+        [width]="256"
+        elementType="svg"
+        [errorCorrectionLevel]="'M'">
+      </qrcode>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

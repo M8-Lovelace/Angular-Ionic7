@@ -1,0 +1,28 @@
+[
+    {
+        "id_product": 1,
+        "img": "assets/img/galletas.jpg",
+        "name": "Galletas",
+        "discount": 10
+    },
+    {
+        "id_product": 2,
+        "img": "assets/img/vino.jpg",
+        "name": "Vino rosado",
+        "discount": 20
+    },
+    {
+        "id_product": 3,
+        "img": "assets/img/carne.jpg",
+        "name": "Carne de ternera",
+        "discount": 50
+    },
+    {
+        "id_product": 4,
+        "img": "assets/img/cafe.jpg",
+        "name": "Cafe",
+        "discount": 30
+    }
+]
+
+

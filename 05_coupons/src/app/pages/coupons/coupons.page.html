@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" *ngIf="!showCamera">
+  <ion-toolbar>
+    <ion-title>Cupones</ion-title>
+
+    <!-- Icono camara -->
+    <ion-item slot="end" lines="none" (click)="startCamera()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-item>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="!showCamera">
+ 
+  <!-- Mostramos cupones -->
+  <ion-card *ngFor="let coupon of coupons; let last=last" [ngClass]="{'margin-last': last}">
+    <!-- Imagen del cupon -->
+    <ion-img [src]="coupon.img"></ion-img>
+
+    <!-- Nombre del cupon -->
+    <ion-card-header>
+      <ion-card-title>{{coupon.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <!-- Descuento del cupon -->
+        <ion-label>{{coupon.discount}} %</ion-label>
+        <!-- Boton para activar/desactivar -->
+        <ion-button slot="end" (click)="changeActive(coupon)">
+          {{coupon.active ? 'Desactivar': 'Activar'}}
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- Boton para ir a la tarjeta de cupones -->
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <!-- Solo activo si hay un cupon activo -->
+    <ion-fab-button [disabled]="!couponsActive" (click)="goToCard()">
+      <ion-icon name="card-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+<!-- Boton para cancelar el escaneo de QR -->
+<ion-fab horizontal="start" vertical="bottom" slot="fixed" *ngIf="showCamera">
+  <ion-fab-button (click)="closeCamera()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
