@@ -1,0 +1,31 @@
+<form (ngSubmit)="createUpdateStudent()">
+  <!-- Nombre -->
+  <ion-item>
+    <ion-input [label]="'label.form.student.name' | translate" type="text" [(ngModel)]="student.name" name="name"></ion-input>
+  </ion-item>
+  <!-- Apellidos -->
+  <ion-item>
+    <ion-input [label]="'label.form.student.surname' | translate" type="text" [(ngModel)]="student.surname" name="surname"></ion-input>
+  </ion-item>
+  <!-- Email -->
+  <ion-item>
+    <ion-input [label]="'label.form.student.email' | translate" type="email" [(ngModel)]="student.email" name="email"></ion-input>
+  </ion-item>
+  <!-- Telefono -->
+  <ion-item>
+    <ion-input [label]="'label.form.student.phone' | translate" type="tel" [(ngModel)]="student.phone" name="phone"></ion-input>
+  </ion-item>
+  
+  <!-- Botones -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" type="button" (click)="closeForm()">{{'label.back' | translate}}</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" type="submit">{{(update ? 'label.edit.student' : 'label.add.student') | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>

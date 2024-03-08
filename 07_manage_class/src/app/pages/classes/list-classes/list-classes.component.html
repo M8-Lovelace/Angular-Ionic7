@@ -1,0 +1,70 @@
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="!showForm">
+
+      <!-- Filtro -->
+      <app-filter 
+        [filter]="filter"
+        (filterData)="filterData($event)">
+      </app-filter>
+
+      <!-- Datos -->
+      <ion-row>
+        <ion-col>
+          <app-list-data 
+            [data]="classes"
+            emptyText="label.no.clases"
+            addText="label.add.class"
+            (add)="onShowForm()">
+
+            <!-- Template -->
+            <ng-template #templateData let-item="item">
+
+              <ion-item-sliding>
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    {{item.student?.name + ' ' + item.student?.surname}} - 
+                    {{item.date_start | date: 'dd MMM yyyy HH:mm'}} -
+                    {{item.date_end | date: 'HH:mm'}} - 
+                    {{item.price + ' €'}}
+                  </ion-label>
+                </ion-item>
+
+                <!-- Opciones -->
+                <ion-item-options>
+                  <!-- Solo si se tiene que pagar -->
+                  <ion-item-option color="success" (click)="payClass(item)" *ngIf="item.needPay">
+                    <ion-icon name="cash-outline" slot="icon-only"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="warning" (click)="updateClass(item)">
+                    <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="danger" (click)="deleteClassConfirm(item)">
+                    <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+
+              </ion-item-sliding>
+
+             
+                
+            </ng-template>
+
+          </app-list-data>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+    <!-- Formulario clases -->
+    <ion-col *ngIf="showForm">
+      <ion-row>
+        <ion-col>
+          <app-form-classes 
+            [classObj]="classSelected"
+            (close)="onCloseForm()">
+          </app-form-classes>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>

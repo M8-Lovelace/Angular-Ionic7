@@ -1,0 +1,73 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <form (ngSubmit)="filterData()">
+
+        <!-- Solo para pagos -->
+        <ion-row *ngIf="payment">
+          <ion-col>
+            <ion-item>
+              <ion-toggle [(ngModel)]="filter.paid" name="paid">{{'label.paid' | translate}}</ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fecha de inicio -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{'label.class.date.start' | translate}}</ion-label>
+              <ion-datetime-button slot="end" displayFormat="DD MMM yyyy HH MM"
+                datetime="date_start"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="date_start" [(ngModel)]="filter.date_start" name="date_start"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fecha de fin -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{'label.class.date.end' | translate}}</ion-label>
+              <ion-datetime-button slot="end" displayFormat="DD MMM yyyy HH MM"
+                datetime="date_end"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="date_end" [(ngModel)]="filter.date_end" name="date_end"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Estudiante -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-select [label]="'label.form.class.student' | translate" name="student"
+                [(ngModel)]="filter.id_student">
+                <ion-select-option [value]="student.id" *ngFor="let student of students">{{student.name + ' ' +
+                  student.surname}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Botones -->
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="block" type="submit">{{'label.filter' | translate}}</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" type="button" (click)="reset()">{{'label.reset' | translate}}</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-grid>

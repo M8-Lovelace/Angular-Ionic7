@@ -1,0 +1,48 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+
+      <!-- Filtro -->
+      <app-filter 
+        [filter]="filter" 
+        [payment]="true"
+        (filterData)="filterData($event)">
+      </app-filter>
+
+      <!-- Total -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>{{'label.total' | translate}}</ion-label>
+            <ion-text>{{total}}</ion-text>
+          </ion-item>
+        </ion-col> 
+      </ion-row>
+
+      <!-- Datos -->
+      <ion-row>
+        <ion-col>
+          <app-list-data 
+            [data]="payments"
+            [emptyText]="'label.no.payment' | translate"
+            [showAdd]="false">
+
+            <!-- Template -->
+            <ng-template #templateData let-item="item">
+              <ion-item [ngClass]="{'no-paid': !item.paid, 'paid': item.paid}">
+                <ion-label class="ion-text-wrap">
+                  {{item.class?.student?.name + ' ' + item.class?.student?.surname}} - 
+                  {{ (item.date ? item.date: item.class.date_start) | date: 'dd MMM yyyy HH:mm'}} -
+                  {{ (item.paid ? 'label.paid': 'label.no.paid') | translate }}
+                </ion-label>
+              </ion-item>
+            </ng-template>
+
+          </app-list-data>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-col>
+  </ion-row>
+</ion-grid>

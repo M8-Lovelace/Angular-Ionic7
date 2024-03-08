@@ -1,0 +1,167 @@
+{
+    "database": "class.db",
+    "version": 1,
+    "encrypted": false,
+    "mode": "full",
+    "tables": [
+        {
+            "name": "students",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "name",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "surname",
+                    "value": "TEXT"
+                },
+                {
+                    "column": "email",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "phone",
+                    "value": " TEXT NOT NULL"
+                },
+                {
+                    "column": "active",
+                    "value": "INTEGER DEFAULT 1"
+                }
+            ],
+            "values": [
+                [
+                    1,
+                    "Fer",
+                    "Ure",
+                    "t1@t.com",
+                    "123456",
+                    1
+                ],
+                [
+                    2,
+                    "Nando",
+                    "Ure",
+                    "t2@t.com",
+                    "654321",
+                    1
+                ],
+                [
+                    3,
+                    "Ricardo",
+                    "Hervas",
+                    "t3@t.com",
+                    "159753",
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "class",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "date_start",
+                    "value": "TEXT"
+                },
+                {
+                    "column": "date_end",
+                    "value": "TEXT"
+                },
+                {
+                    "column": "id_student",
+                    "value": "INTEGER NOT NULL"
+                },
+                {
+                    "column": "price",
+                    "value": "REAL NOT NULL"
+                },
+                {
+                    "column": "active",
+                    "value": "INTEGER DEFAULT 1"
+                },
+                {
+                    "foreignkey": "id_student",
+                    "value": "REFERENCES students(id)"
+                }
+            ],
+            "values": [
+                [
+                    1,
+                    "2020-10-03T15:00",
+                    "2020-10-03T16:00",
+                    1,
+                    10,
+                    1
+                ],
+                [
+                    2,
+                    "2020-10-04T16:00",
+                    "2020-10-04T17:00",
+                    2,
+                    5,
+                    1
+                ],
+                [
+                    3,
+                    "2020-10-05T17:00",
+                    "2020-10-05T18:00",
+                    2,
+                    15,
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "payment",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "date",
+                    "value": "TEXT"
+                },
+                {
+                    "column": "id_class",
+                    "value": "INTEGER NOT NULL"
+                },
+                {
+                    "column": "paid",
+                    "value": "REAL DEFAULT 0"
+                },
+                {
+                    "foreignkey": "id_class",
+                    "value": "REFERENCES class(id)"
+                }
+            ],
+            "values": [
+                [
+                    1,
+                    "2020-10-03T15:00",
+                    1,
+                    1
+                ],
+                [
+                    2,
+                    null,
+                    2,
+                    0
+                ],
+                [
+                    3,
+                    "2020-10-07T17:00",
+                    3,
+                    1
+                ]
+            ]
+        }
+    ]
+}

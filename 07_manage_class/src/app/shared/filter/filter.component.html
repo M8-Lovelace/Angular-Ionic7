@@ -1,0 +1,9 @@
+
+<ion-row>
+  <ion-col>
+    <!-- Boton para abrir y cerrar el filtro -->
+    <ion-button expand="block" (click)="showHideFilter($event)">
+      {{ (showFilter ? 'label.hide.filters':'label.show.filters') | translate}}
+    </ion-button>
+  </ion-col>
+</ion-row>

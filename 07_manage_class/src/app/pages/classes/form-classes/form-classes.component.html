@@ -1,0 +1,66 @@
+<form (ngSubmit)="createUpdateClass()">
+
+  <!-- Fecha de inicio -->
+  <ion-item>
+    <ion-label>{{'label.class.date.start' | translate}}</ion-label>
+    <ion-datetime-button slot="end" displayFormat="DD MMM yyyy HH MM" datetime="date_start"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="date_start" [(ngModel)]="classObj.date_start" name="date_start"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <!-- Fecha de fin -->
+  <ion-item>
+    <ion-label>{{'label.class.date.end' | translate}}</ion-label>
+    <ion-datetime-button slot="end" displayFormat="DD MMM yyyy HH MM" datetime="date_end"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="date_end" [(ngModel)]="classObj.date_end" name="date_end"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <!-- Estudiante -->
+  <ion-item>
+    <ion-select [label]="'label.form.class.student' | translate" name="student" [(ngModel)]="classObj.id_student">
+      <ion-select-option [value]="student.id" *ngFor="let student of students">{{student.name + ' ' + student.surname}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Precio -->
+  <ion-item>
+    <ion-range min="0" max="100" [(ngModel)]="classObj.price" name="price" [label]="'label.form.class.price' | translate"></ion-range>
+    <ion-text>{{classObj.price}} €</ion-text>
+  </ion-item>
+
+  <!-- Indica si esta la clase pagada -->
+  <ion-item>
+    <ion-toggle [disabled]="update && alreadyPaid" [(ngModel)]="paid" name="paid">{{'label.is.paid' | translate}}</ion-toggle>
+  </ion-item>
+
+  <!-- Fecha de pago -->
+  <ion-item *ngIf="paid">
+    <ion-label>{{'label.date.paid' | translate}}</ion-label>
+    <ion-datetime-button slot="end" displayFormat="DD MMM yyyy HH MM" datetime="date_paid"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="date_paid" [(ngModel)]="payment.date" name="date_paid"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <!-- Botones -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" type="button" (click)="closeForm()">{{'label.back' | translate}}</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" type="submit">{{(update ? 'label.edit.class' : 'label.add.class') | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>

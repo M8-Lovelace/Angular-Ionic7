@@ -1,0 +1,55 @@
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="!showForm">
+
+      <!-- Filtro -->
+      <ion-row>
+        <ion-col>
+          <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+
+      <!-- Datos -->
+      <ion-row>
+        <ion-col>
+          <app-list-data 
+          [data]="students"
+          emptyText="label.no.students"
+          addText="label.add.student"
+          (add)="onShowForm()">
+
+          <!-- Template -->
+          <ng-template #templateData let-item="item">
+
+            <ion-item-sliding>
+
+              <ion-item>
+                <ion-label>{{item.name + ' ' + item.surname}}</ion-label>
+              </ion-item>
+
+              <!-- Opciones -->
+              <ion-item-options side="end">
+                <ion-item-option color="warning" (click)="updateStudent(item)">
+                  <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="danger" (click)="deleteStudentConfirm(item)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+
+            </ion-item-sliding>
+
+
+          </ng-template>
+        
+        </app-list-data>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+    <!-- Formulario estudiante -->
+    <ion-col *ngIf="showForm">
+      <app-form-student [student]="studentSelected" (close)="onCloseForm()"></app-form-student>
+    </ion-col>
+  </ion-row>
+</ion-grid>
