@@ -1,0 +1,34 @@
+<ion-content class="ion-padding game" [fullscreen]="true">
+
+  <div class="game-center">
+    <ion-grid>
+      <ion-row>
+        <!-- Puntos -->
+        <ion-col size="7">
+          <span class="points">{{points}}</span>
+          <span id="pointsScored"></span>
+        </ion-col>
+        <!-- Nuevo juego -->
+        <ion-col size="5">
+          <ion-button (click)="newGame()">{{'label.new.game' | translate}}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <!-- Tablero -->
+          <ion-grid id="board-game" #boardGame>
+            <ion-row *ngFor="let r of rows; let row=index">
+              <ion-col *ngFor="let c of cols; let col=index" [attr.id]="row+''+col"
+                [ngClass]="{'grid-cell': board[row][col] == null}"
+                [class]="board[row][col] ? 'number-' + board[row][col].value : '' ">
+                {{board[row][col] ? board[row][col].value : ''}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

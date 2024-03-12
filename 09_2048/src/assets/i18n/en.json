@@ -1,0 +1,8 @@
+{
+    "label.win.game.title": "You win!",
+    "label.lose.game.title": "You lose!",
+    "label.game.content": "Your puntuation was {{points}} points",
+    "label.new.game": "New game",
+    "label.share": "Share",
+    "label.share.dialog.title": "I've scored {{points}} points in the app 2048!"
+}
