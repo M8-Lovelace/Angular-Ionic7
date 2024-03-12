@@ -1,0 +1,83 @@
+<!-- Refresher -->
+<ion-refresher slot="fixed" (ionRefresh)="refreshEvents($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+<ion-grid>
+
+  <!-- Filtro de eventos por titulo -->
+  <ion-row>
+    <ion-col>
+      <ion-searchbar #searchbar (ionInput)="filterEvents()"></ion-searchbar>
+    </ion-col>
+  </ion-row>
+
+  <!-- Filtro de chips -->
+  <ion-row>
+    <ion-col>
+      <ion-chip class="blog" [ngClass]="{'selected': typeSearch === 'blog'}" (click)="filterEventsByType('blog')">
+        <ion-icon name="desktop-outline"></ion-icon>
+        <ion-label>{{'label.type.post.event' | translate}}</ion-label>
+      </ion-chip>
+      <ion-chip class="video" [ngClass]="{'selected': typeSearch === 'video'}" (click)="filterEventsByType('video')">
+        <ion-icon name="caret-forward-circle-outline"></ion-icon>
+        <ion-label>{{'label.type.video.event' | translate}}</ion-label>
+      </ion-chip>
+      <ion-chip class="streaming" [ngClass]="{'selected': typeSearch === 'streaming'}" (click)="filterEventsByType('streaming')">
+        <ion-icon name="videocam-outline"></ion-icon>
+        <ion-label>{{'label.type.streaming.event' | translate}}</ion-label>
+      </ion-chip>
+      <ion-chip class="udemy" [ngClass]="{'selected': typeSearch === 'udemy'}" (click)="filterEventsByType('udemy')">
+        <ion-icon name="ticket-outline"></ion-icon>
+        <ion-label>{{'label.type.udemy.event' | translate}}</ion-label>
+      </ion-chip>
+    </ion-col>
+  </ion-row>
+
+  <!-- Sin eventos -->
+  <ion-row *ngIf="events?.length == 0">
+    <ion-col class="ion-text-center ion-margin">
+      {{'label.no.events' | translate}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="events?.length > 0">
+    <ion-col size="12" *ngFor="let event of events">
+    
+      <ion-card [ngClass]="event.type" (click)="clickEvent(event)">
+        <ion-card-content>
+          <!-- Fecha de inicio -->
+          <ion-item lines="none">
+            <ion-label>
+              <ion-text>{{'label.start.event' | translate}}</ion-text>: <ion-text>{{event.start | date: 'dd-MM-yyyy HH:mm'}}</ion-text>
+            </ion-label>
+          </ion-item>
+
+          <!-- Fecha de fin -->
+          <ion-item lines="none" *ngIf="event.end">
+            <ion-label>
+              <ion-text>{{'label.end.event' | translate}}</ion-text>: <ion-text>{{event.end | date: 'dd-MM-yyyy HH:mm'}}</ion-text>
+            </ion-label>
+          </ion-item>
+
+          <!-- Titulo -->
+          <ion-item lines="none">
+            <ion-label>
+              <ion-text>{{event.title}}</ion-text>
+            </ion-label>
+          </ion-item>
+
+          <!-- Descripción -->
+          <ion-item lines="none">
+            <ion-label>
+              <ion-text>{{event.description}}</ion-text>
+            </ion-label>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+
+</ion-grid>

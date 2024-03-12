@@ -1,0 +1,24 @@
+<form (ngSubmit)="login()">
+
+  <!-- Email -->
+  <ion-item>
+    <ion-input 
+      [label]="'label.email' | translate"
+      type="email"
+      name="email"
+      [(ngModel)]="user.email">
+    </ion-input>
+  </ion-item>
+  <!-- Password -->
+  <ion-item>
+    <ion-input 
+      [label]="'label.password' | translate"
+      type="password"
+      name="password"
+      [(ngModel)]="user.password">
+    </ion-input>
+  </ion-item>
+
+  <ion-button expand="block" type="submit">{{'label.login' | translate}}</ion-button>
+
+</form>

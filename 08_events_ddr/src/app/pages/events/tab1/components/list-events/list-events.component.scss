@@ -1,0 +1,39 @@
+ion-card.blog {
+    border-left: 3px solid #7c7c7c;
+}
+
+ion-card.video {
+    border-left: 3px solid #c4302b;
+}
+
+ion-card.streaming {
+    border-left: 3px solid #6441a5;
+}
+
+ion-card.udemy {
+    border-left: 3px solid #ea5252;
+}
+
+ion-chip, ion-chip ion-icon {
+    color: #FFF;
+}
+
+ion-chip.blog {
+    background: #7c7c7c ;
+}
+
+ion-chip.video {
+    background: #c4302b ;
+}
+
+ion-chip.streaming {
+    background: #6441a5 ;
+}
+
+ion-chip.udemy {
+    background: #ea5252 ;
+}
+
+ion-chip.selected {
+    background: #2e6eff;
+}

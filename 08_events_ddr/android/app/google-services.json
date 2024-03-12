@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "769529840637",
+    "firebase_url": "https://events-ddr-4c513-default-rtdb.firebaseio.com",
+    "project_id": "events-ddr-4c513",
+    "storage_bucket": "events-ddr-4c513.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769529840637:android:aec8bbd655595317164f94",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUZ70ci6uCdkRKts8Z9H5x8ZsEE9I49eM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
